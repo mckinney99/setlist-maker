@@ -4,7 +4,8 @@ devise User
 -has_many: songs, through: :setlists
 
 songs
--belong_to: setlists
+-belongs_to: user
+-belongs_to: setlist
 
 setlists
 -belongs_to: user 
