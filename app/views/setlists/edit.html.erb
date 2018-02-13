@@ -1,1 +1,18 @@
 <p>setlists/edit</p>
+
+<%= render 'form'%>
+<br>
+
+
+
+<br><br>
+<%=select_tag 'add_song', options_for_select(@current_user.songs.collect{ |s| [s.title] })%>
+<%=button_tag "Add Song"%>
+
+<br><br>
+
+
+
+
+
+

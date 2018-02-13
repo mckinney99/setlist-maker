@@ -1,1 +1,22 @@
 <p>songs/index</p>
+
+
+
+
+<% @current_user.songs.each do |s| %>
+<a href="/songs/<%=s.id%>">
+<%= s.title %><br>
+<%= s.artist %><br>
+
+<br><br>
+<%end%>
+
+
+<br>
+<br>
+
+<%= link_to "View Setlists", setlists_path(current_user.setlists) %>
+
+<%= link_to "New Song", new_song_path(current_user.songs.new) %></li>
+
+

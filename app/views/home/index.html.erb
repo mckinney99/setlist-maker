@@ -1,10 +1,24 @@
-<h1>Home#index poop</h1>
+<h1>Home#index</h1>
 <p>Find me in app/views/home/index.html.erb</p>
 
-<a href="/users/<%=current_user.id%>/setlists/new">Create a new Setlist</a>
-<br>
-<a href="/users/<%=current_user.id%>/songs/new">Create a new Song</a>
-<br>
-<a href="/users/<%=current_user.id%>/songs/index">View current songs</a>
-<br>
-<a href="/users/<%=current_user.id%>/setlists/index">View all Setlists</a>
+
+
+ 
+<% if current_user %>
+    | Signed in as <%= current_user.email%> |
+    <br><br>
+    <% if current_user.songs %>
+    <%= link_to "View Songs", songs_path(current_user.songs) %></li>
+    <br><br>
+    <%= link_to "View Setlists", setlists_path(current_user.setlists) %></li>
+    <% end %>
+<% end %>
+      <br><br>  
+<% if current_user %>
+    <%= link_to "Sign out", destroy_user_session_path,:method => :delete %>
+    <% else %>
+    <%= link_to "sign in", new_user_session_path %> |
+    <%= link_to "Sign up", new_user_registration_path %>
+<% end %>
+        
+

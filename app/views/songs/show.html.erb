@@ -1,0 +1,18 @@
+<div class="info">
+  
+<p>Name: <%= @songs.title %><br>
+Artist: <%= @songs.artist %><br>
+Comments: <%= @songs.comments %><br>
+
+<% if @current_user %>
+      <%= link_to "Edit song", [:edit, @songs] %></p>
+    <% else %>
+      <form action="/songs/new" method="post">
+        <%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
+        <%= tag(:input, :type => "hidden", :name => :user_id, :value => current_user.id) %>
+        <%= tag(:input, :type => "hidden", :name => :song_id, :value => @songs.id) %>
+      </form>
+    <% end %>
+    <%= link_to 'View All Songs', songs_path %></p>
+    
+  </div>

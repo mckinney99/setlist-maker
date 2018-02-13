@@ -1,0 +1,16 @@
+<div class="info">
+  
+<p>Name: <%= @setlists.name %><br>
+Comments: <%= @setlists.comments %><br>
+
+<% if @current_user %>
+      <%= link_to "Edit setlist", [:edit, @setlists] %></p>
+    <% else %>
+      <form action="/setlists/new" method="post">
+        <%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
+        <%= tag(:input, :type => "hidden", :name => :user_id, :value => current_user.id) %>
+        <%= tag(:input, :type => "hidden", :name => :song_id, :value => @setlists.id) %>
+      </form>
+    <% end %>
+    <%= link_to 'View All setlists', setlists_path %></p>
+  </div>

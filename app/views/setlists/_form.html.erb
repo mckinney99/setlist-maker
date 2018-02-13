@@ -1,0 +1,14 @@
+<%= form_for(@setlist) do |f| %>
+<div class = "field">
+<%= f.label :name %>
+<%= f.text_field :name %>
+</div>
+
+<div class = "field">
+<%= f.label :comments %>
+<%= f.text_field :comments %>
+</div>
+
+<div class = "actions">
+<%= f.submit %>
+<%end%>

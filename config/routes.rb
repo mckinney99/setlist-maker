@@ -1,15 +1,25 @@
 Rails.application.routes.draw do
 
+  
+  resources :songs
+  resources :setlists
+
   devise_for :users
   get 'home/index'
-  get 'users/:id/setlists/new' => 'setlists#new'
-  get 'users/:id/setlists/:id/edit' => 'setlists#edit'
-  get 'users/:id/setlists' => 'setlists#index'
-  get 'users/:id/songs/new' => 'songs#new'
-  get 'users/:id/songs/:id/edit' => 'songs#edit'
-  get 'users/:id/songs' => 'songs#index'
-
   root 'home#index'
+  get 'user/:id/songs' => 'songs#index'
+  get 'user/:id/song/:id' => 'songs#edit'
+  get 'user/:id/song/new' => 'songs#new'
+
+  get 'user/:id/setlists' => 'setlists#index'
+  get 'user/:id/setlists/:id/edit' => 'setlists#edit'
+  get 'user/:id/setlists/new' => 'setlists#new'
+
+  post 'user/:id/songs' => 'songs#index'
+  post 'user/:id/setlists/edit' => 'setlists#edit'
+
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
