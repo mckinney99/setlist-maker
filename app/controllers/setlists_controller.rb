@@ -1,8 +1,8 @@
-require 'pry'
 class SetlistsController < ApplicationController
 
     def index
         @setlists = Setlist.all
+            
     end
     
     def show
@@ -19,20 +19,19 @@ class SetlistsController < ApplicationController
           if @setlist.save
             session[:Setlist_id] = @setlist.id
             redirect_to setlist_path(@setlist)
+            
           else
             render :new
         end
     end
-    
+
     def edit
+        
         @setlist = Setlist.find(params[:id])
-        
-       binding.pry
-        
-        
-        
-        
+           
     end
+    
+    
     
     def update
         @setlist = Setlist.find(params[:id])
@@ -42,6 +41,14 @@ class SetlistsController < ApplicationController
             render :edit
         end
       end
+
+    def add_song(song)
+        @song = current_user.songs.find(params[:id])
+        @song.add_to_setlist
+    end
+
+   
+        
     
     
       private
@@ -49,5 +56,8 @@ class SetlistsController < ApplicationController
         params.require(:setlist).permit(:name, :comments, :user_id)
       end
 
+     
+
     end
+
 

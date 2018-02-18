@@ -1,6 +1,6 @@
 <p>setlists/index</p>
 
-<% @current_user.setlists.each do |s| %>
+<% current_user.setlists.each do |s| %>
 <a href="/setlists/<%=s.id%>">
 <%= s.name %><br>
 <%= s.comments %><br>
@@ -8,4 +8,4 @@
 <br><br>
 <%end%>
 
-<%= link_to "New Setlist", new_setlist_path(current_user.setlists.new) %></li>
+<%= link_to "New Setlist", new_setlist_path(current_user.setlists.new) %>

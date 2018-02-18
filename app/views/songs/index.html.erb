@@ -3,7 +3,7 @@
 
 
 
-<% @current_user.songs.each do |s| %>
+<% current_user.songs.each do |s| %>
 <a href="/songs/<%=s.id%>">
 <%= s.title %><br>
 <%= s.artist %><br>

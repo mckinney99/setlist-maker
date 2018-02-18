@@ -3,8 +3,8 @@
 <p>Name: <%= @setlists.name %><br>
 Comments: <%= @setlists.comments %><br>
 
-<% if @current_user %>
-      <%= link_to "Edit setlist", [:edit, @setlists] %></p>
+<% if current_user %>
+      <%= link_to "Edit setlist", edit_setlist_path %></p>
     <% else %>
       <form action="/setlists/new" method="post">
         <%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
@@ -13,4 +13,5 @@ Comments: <%= @setlists.comments %><br>
       </form>
     <% end %>
     <%= link_to 'View All setlists', setlists_path %></p>
+    
   </div>

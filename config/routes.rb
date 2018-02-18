@@ -1,22 +1,28 @@
 Rails.application.routes.draw do
 
   
-  resources :songs
+  resources :songs 
   resources :setlists
 
-  devise_for :users
   get 'home/index'
   root 'home#index'
-  get 'user/:id/songs' => 'songs#index'
-  get 'user/:id/song/:id' => 'songs#edit'
-  get 'user/:id/song/new' => 'songs#new'
 
-  get 'user/:id/setlists' => 'setlists#index'
-  get 'user/:id/setlists/:id/edit' => 'setlists#edit'
-  get 'user/:id/setlists/new' => 'setlists#new'
+  get 'songs' => 'songs#index'
+  get 'song/:id' => 'songs#edit'
+  get 'song/new' => 'songs#new'
 
-  post 'user/:id/songs' => 'songs#index'
-  post 'user/:id/setlists/edit' => 'setlists#edit'
+  get 'users/:id/setlists' => 'setlists#index'
+  get 'setlist/:id' => 'setlists#edit'
+  get 'setlist/new' => 'setlists#new'
+
+  post 'users/:id/songs' => 'songs#index'
+  post 'setlists/:id' => 'setlists#edit'
+  post 'setlists/:id' => 'setlists#add_song'
+  
+  
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+  
+  
 
 
 

@@ -6,10 +6,21 @@
 
 
 <br><br>
-<%=select_tag 'add_song', options_for_select(@current_user.songs.collect{ |s| [s.title] })%>
-<%=button_tag "Add Song"%>
+<form>
+
+<%=select('add_song', 'add_song', options_for_select(current_user.songs.collect{ |s| [s.title] })) %>
+<%= button_to 'Add Song', action: "add_song" %>
+<%binding.pry%>
+
+<%#=button_tag "Add Song", action 'add_song'%>
+
 
 <br><br>
+
+
+
+
+
 
 
 
