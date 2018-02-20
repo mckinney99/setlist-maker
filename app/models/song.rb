@@ -1,7 +1,8 @@
 class Song < ActiveRecord::Base
     belongs_to :user
-    belongs_to :setlist
-    belongs_to :setlist_song
+    has_many :setlist_songs
+    has_many :setlists, through: :setlist_songs
+
     
 
     
