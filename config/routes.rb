@@ -19,13 +19,14 @@ Rails.application.routes.draw do
   post 'users/:id/songs' => 'songs#index'
   post 'setlists/:id' => 'setlists#edit'
   #post 'setlists/:id' => 'setlists#add_song'
+
+  delete 'setlist/:id' => 'setlists#edit', as: 'delete_song'
   
   
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   
   resources :songs 
   resources :setlists
-  resources :setlist_songs
 
 
 

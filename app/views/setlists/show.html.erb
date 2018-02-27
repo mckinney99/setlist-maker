@@ -15,3 +15,7 @@ Comments: <%= @setlists.comments %><br>
     <%= link_to 'View All setlists', setlists_path %></p>
     
   </div>
+
+<% @setlists.songs.each do |s|%>
+<li><%= s.title%></li>
+<%end%>

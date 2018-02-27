@@ -28,7 +28,8 @@ class SetlistsController < ApplicationController
     def edit
         
         @setlist = Setlist.find(params[:id])
-           
+        @song = Song.find(params[:id])
+        
     end
     
     
@@ -44,15 +45,14 @@ class SetlistsController < ApplicationController
 
     def add_song
         @setlist = Setlist.find(params[:id])
+        @song = Song.find(params[:id])
         @setlist_songs = SetlistSong.new
-        @song = Song.find_by(id = @setlist_songs.song_id)
-        @setlist_songs.setlist_id = @setlist.id
         @setlist_songs.song_id = @song.id
+        @setlist_songs.setlist_id = @setlist.id
         @setlist_songs.save
         
         render :edit
     end
-
 
 
    
@@ -65,7 +65,7 @@ class SetlistsController < ApplicationController
       end
 
       def setlist_song_params
-        params.require(:setlist_song).permit(:setlist_id, :song_id)
+        params.require(:setlist_songs).permit(:setlist_id, :song_id)
       end     
 
     end

@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'dotenv-rails'
-gem 'omniauth-facebook'
+gem 'omniauth-github'
 gem 'pry'
 gem 'devise'
 

@@ -6,15 +6,17 @@
 
 
 <br><br>
-<%=form_tag(controller: "setlists", action: "add_song", method: "post") do %>
-<%=select('add_song', 'add_song', options_for_select(current_user.songs.collect{ |s| [s.title] })) %>
-<%= submit_tag  %>
+<%=form_tag(controller: "setlists", action: "add_song") do %>
+<%=select('Add Song', 'add_song', options_for_select(current_user.songs.collect{ |s| [s.title] })) %>
+<%= submit_tag  'Add Song To Setlist' %>
 <%end%>
 
-
-<% current_user.setlist_songs.each do |s| %>
-<%= s.title %><br>
+<% @setlist.songs.each do |s|%>
+<li> <%= s.title%> </li>
+<br>
 <%end%>
+
+<%#@binding.pry%>
 
 
 <br><br>
