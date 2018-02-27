@@ -1,3 +1,4 @@
 <p>songs/edit</p>
 
 <%= render 'form'%>
+<%= button_to "Delete", {:controller => :songs, :id => @song.id, :action => 'destroy' }, :method => :delete %>

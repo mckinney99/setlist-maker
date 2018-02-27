@@ -5,17 +5,15 @@
 
 <% current_user.songs.each do |s| %>
 <a href="/songs/<%=s.id%>">
-<%= s.title %><br>
-<%= s.artist %><br>
+<%= s.title %> - <%= s.artist %><br>
 
 <br><br>
 <%end%>
 
 
-<br>
-<br>
 
-<%= link_to "View Setlists", setlists_path(current_user.setlists) %>
+<br>
+<br>
 
 <%= link_to "New Song", new_song_path(current_user.songs.new) %></li>
 

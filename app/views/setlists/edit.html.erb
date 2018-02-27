@@ -7,12 +7,12 @@
 
 <br><br>
 <%=form_tag(controller: "setlists", action: "add_song") do %>
-<%=select('Add Song', 'add_song', options_for_select(current_user.songs.collect{ |s| [s.title] })) %>
-<%= submit_tag  'Add Song To Setlist' %>
+<%=select('songs', 'song_id', options_for_select(current_user.songs.collect{ |s| [s.title, s.id] })) %>
+<%= submit_tag('Add Song To Setlist')  %>
 <%end%>
 
 <% @setlist.songs.each do |s|%>
-<li> <%= s.title%> </li>
+<li> <%= s.title%> <%= button_to "delete", {:controller => :setlists, :song_id => s.id, :action => 'destroy_song' }, :method => :delete %>
 <br>
 <%end%>
 

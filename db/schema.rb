@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20180211182838) do
     t.string  "title"
     t.string  "artist"
     t.string  "comments"
+    t.string  "song_url"
     t.integer "user_id"
   end
 

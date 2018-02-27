@@ -26,10 +26,7 @@ class SetlistsController < ApplicationController
     end
 
     def edit
-        
         @setlist = Setlist.find(params[:id])
-        @song = Song.find(params[:id])
-        
     end
     
     
@@ -45,12 +42,16 @@ class SetlistsController < ApplicationController
 
     def add_song
         @setlist = Setlist.find(params[:id])
-        @song = Song.find(params[:id])
         @setlist_songs = SetlistSong.new
-        @setlist_songs.song_id = @song.id
+        @setlist_songs.song_id = params[:songs]["song_id"]
         @setlist_songs.setlist_id = @setlist.id
         @setlist_songs.save
-        
+        render :edit
+    end
+
+    def destroy_song
+        @setlist = Setlist.find(params[:id])
+        @setlist.songs.destroy(params[:song_id])
         render :edit
     end
 

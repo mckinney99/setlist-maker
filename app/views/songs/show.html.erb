@@ -3,6 +3,7 @@
 <p>Name: <%= @songs.title %><br>
 Artist: <%= @songs.artist %><br>
 Comments: <%= @songs.comments %><br>
+<a href="<%=@songs.song_url%>"target="_blank"> Link to song </a>
 
 <% if @current_user %>
       <%= link_to "Edit song", [:edit, @songs] %></p>
@@ -13,6 +14,9 @@ Comments: <%= @songs.comments %><br>
         <%= tag(:input, :type => "hidden", :name => :song_id, :value => @songs.id) %>
       </form>
     <% end %>
-    <%= link_to 'View All Songs', songs_path %></p>
+    <br><br>
+    <%= link_to 'Edit Song', edit_song_path %>
+    <br><br>
+    <%= link_to 'New Song', new_song_path %>
     
   </div>

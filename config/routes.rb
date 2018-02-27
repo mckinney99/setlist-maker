@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
 
-  
-  
-
   get 'home/index'
   root 'home#index'
 
@@ -20,7 +17,8 @@ Rails.application.routes.draw do
   post 'setlists/:id' => 'setlists#edit'
   #post 'setlists/:id' => 'setlists#add_song'
 
-  delete 'setlist/:id' => 'setlists#edit', as: 'delete_song'
+  delete 'song/:id/edit' => 'songs#destroy', as: 'destroy'
+  delete 'setlist/:id/edit' => 'setlists#destroy_song', as: 'destroy_song'
   
   
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
