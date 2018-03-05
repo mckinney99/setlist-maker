@@ -1,69 +1,9 @@
-devise User
--has_many: setlists
--has_many: songs
--has_many: songs, through: :setlists
-
-songs
--belongs_to: user
--belongs_to: setlist
-
-setlists
--belongs_to: user 
--has_many: songs
-
-
-migrate:
-:users 
--as is 
-
-:songs
--title
--artist
--comments
--setlist_id
-
-:setlists
--name
--comments
--user_id
-
-:user_setlists
--setlist_id
--user_id
-
-
-
-
-
-
-
-
-
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Setlist Maker is a simple app that allows bands and musicians to remotely collaborate on a setlist for a show, album, or any other type of song arrangment. 
 
-Things you may want to cover:
+Simply create an account, add new songs with a link so your friends and bandmates can hear the song. Once a new song is created, you can create a new setlist and add those songs accordingly.
 
-* Ruby version
+Users can share their setlists with anybody, however only a the creator of the setlist can edit and add songs.
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Enjoy! 

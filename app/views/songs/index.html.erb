@@ -1,20 +1,13 @@
-<p>songs/index</p>
-
-
-
+<p>All Songs</p>
 
 <% current_user.songs.each do |s| %>
 <a href="/songs/<%=s.id%>">
 <%= s.title %> - <%= s.artist %><br>
 
 <br><br>
+
 <%end%>
 
-
-
-<br>
-<br>
+<br><br>
 
 <%= link_to "New Song", new_song_path(current_user.songs.new) %></li>
-
-

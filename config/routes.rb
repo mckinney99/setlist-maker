@@ -8,7 +8,8 @@ Rails.application.routes.draw do
   get 'song/new' => 'songs#new'
 
   get 'users/:id/setlists' => 'setlists#index'
-  get 'setlist/:id' => 'setlists#edit'
+  get 'setlist/:id' => 'setlists#show'
+  get 'setlist/:id/edit' => 'setlists#edit'
   get 'setlist/new' => 'setlists#new'
 
   post 'setlists/:id' => 'setlists#add_song', as: 'add_song'

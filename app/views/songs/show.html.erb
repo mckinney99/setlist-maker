@@ -14,9 +14,13 @@ Comments: <%= @songs.comments %><br>
         <%= tag(:input, :type => "hidden", :name => :song_id, :value => @songs.id) %>
       </form>
     <% end %>
+
     <br><br>
+
     <%= link_to 'Edit Song', edit_song_path %>
+
     <br><br>
+    
     <%= link_to 'New Song', new_song_path %>
     
   </div>

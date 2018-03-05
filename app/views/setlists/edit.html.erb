@@ -1,9 +1,6 @@
-<p>setlists/edit</p>
+<p>Edit Setlist</p>
 
 <%= render 'form'%>
-<br>
-
-
 
 <br><br>
 <%=form_tag(controller: "setlists", action: "add_song") do %>
@@ -15,19 +12,3 @@
 <li> <%= s.title%> <%= button_to "delete", {:controller => :setlists, :song_id => s.id, :action => 'destroy_song' }, :method => :delete %>
 <br>
 <%end%>
-
-<%#@binding.pry%>
-
-
-<br><br>
-
-
-
-
-
-
-
-
-
-
-

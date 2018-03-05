@@ -1,8 +1,8 @@
 class SetlistsController < ApplicationController
+    skip_before_action :authenticate_user!, only: [:show]
 
     def index
         @setlists = Setlist.all
-            
     end
     
     def show
@@ -19,7 +19,6 @@ class SetlistsController < ApplicationController
           if @setlist.save
             session[:Setlist_id] = @setlist.id
             redirect_to setlist_path(@setlist)
-            
           else
             render :new
         end
@@ -28,8 +27,6 @@ class SetlistsController < ApplicationController
     def edit
         @setlist = Setlist.find(params[:id])
     end
-    
-    
     
     def update
         @setlist = Setlist.find(params[:id])
@@ -56,19 +53,16 @@ class SetlistsController < ApplicationController
     end
 
 
-   
-        
-    
-    
       private
-      def setlist_params
+
+
+    def setlist_params
         params.require(:setlist).permit(:name, :comments, :user_id)
-      end
-
-      def setlist_song_params
-        params.require(:setlist_songs).permit(:setlist_id, :song_id)
-      end     
-
     end
+
+    def setlist_song_params
+        params.require(:setlist_songs).permit(:setlist_id, :song_id)
+    end          
+end
 
 

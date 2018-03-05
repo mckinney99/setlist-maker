@@ -24,6 +24,7 @@ class SongsController < ApplicationController
     
       def edit
         @song = Song.find(params[:id])
+        
       end
     
       def update
@@ -36,7 +37,6 @@ class SongsController < ApplicationController
       end
 
       def destroy
-        #binding.pry
         @song = Song.find(params[:id])
         @song.destroy
         render :index
@@ -44,6 +44,8 @@ class SongsController < ApplicationController
     
     
       private
+
+      
       def song_params
         params.require(:song).permit(:title, :artist, :comments, :song_url, :user_id)
       end
