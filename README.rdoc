@@ -6,12 +6,16 @@ Simply create an account, add new songs with a link so your friends and bandmate
 
 Users can share their setlists with anybody, however only a the creator of the setlist can edit and add songs.
 
-/////////////
+GETTING STARTED:
+
 -to get started fork this repo
 -run "rake db:migrate" once in the text editor
 -run "rails s" to run on your browser.
+
 ////////////
 
 Please file any issues with a pull request. Thank you!
 
 Enjoy! 
+
+[MIT](https://github.com/mckinney99/setlist-maker/blob/master/LICENSE.md
