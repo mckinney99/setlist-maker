@@ -12,6 +12,9 @@ Rails.application.routes.draw do
   get 'setlist/:id/edit' => 'setlists#edit'
   get 'setlist/new' => 'setlists#new'
 
+  post 'song/new' => 'songs#show'
+  post 'setlist/new' => 'setlists#show'
+
   post 'setlists/:id' => 'setlists#add_song', as: 'add_song'
 
   post 'users/:id/songs' => 'songs#index'

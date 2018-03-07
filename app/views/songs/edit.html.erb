@@ -1,4 +1,11 @@
 <p>Edit Song</p>
 
-<%= render 'form'%>
+<%= form_for (@song) do |f| %>
+<%= render 'form', f: f %>
+<%= f.submit %>
+<%end%>
+
+
 <%= button_to "Delete", {:controller => :songs, :id => @song.id, :action => 'destroy' }, :method => :delete %>
+
+

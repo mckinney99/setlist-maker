@@ -1,4 +1,3 @@
-<%= form_for(@song) do |f| %>
 <div class = "field">
 <%= f.label :title %>
 <%= f.text_field :title %>
@@ -19,7 +18,7 @@
 <%= f.text_field :song_url %>
 </div>
 
+<%= f.hidden_field :user_id, :value => current_user.id %>
+
 <div class = "actions">
-<%= f.submit %>
-<%end%>
 </div>

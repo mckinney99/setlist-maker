@@ -18,6 +18,7 @@ class SetlistsController < ApplicationController
         @setlist.user_id = current_user.id 
           if @setlist.save
             session[:Setlist_id] = @setlist.id
+            #binding.pry
             redirect_to setlist_path(@setlist)
           else
             render :new
@@ -57,7 +58,7 @@ class SetlistsController < ApplicationController
 
 
     def setlist_params
-        params.require(:setlist).permit(:name, :comments, :user_id)
+        params.require(:setlist).permit(:name, :comments, :user_id, songs_attributes: [:title, :artist, :comments, :song_url, :song_id, :user_id])
     end
 
     def setlist_song_params

@@ -1,6 +1,9 @@
 <p>Edit Setlist</p>
 
-<%= render 'form'%>
+<%= form_for (@setlist) do |f| %>
+<%= render 'form', f: f %>
+<%= f.submit %>
+<%end%>
 
 <br><br>
 <%=form_tag(controller: "setlists", action: "add_song") do %>
