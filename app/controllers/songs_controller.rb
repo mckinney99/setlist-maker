@@ -15,7 +15,6 @@ class SongsController < ApplicationController
         @song = Song.new(song_params)
         @song.user_id = current_user.id 
           if @song.save
-            session[:song_id] = @song.id
             redirect_to song_path(@song)
           else
             render :new

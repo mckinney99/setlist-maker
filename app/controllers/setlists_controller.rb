@@ -17,8 +17,6 @@ class SetlistsController < ApplicationController
         @setlist = Setlist.new(setlist_params)
         @setlist.user_id = current_user.id 
           if @setlist.save
-            session[:Setlist_id] = @setlist.id
-            #binding.pry
             redirect_to setlist_path(@setlist)
           else
             render :new
@@ -42,7 +40,7 @@ class SetlistsController < ApplicationController
         @setlist = Setlist.find(params[:id])
         @setlist_songs = SetlistSong.new
         @setlist_songs.song_id = params[:songs]["song_id"]
-        @setlist_songs.setlist_id = @setlist.id
+        @setlist_songs.setlist_id = @setlist.id 
         @setlist_songs.save
         render :edit
     end
