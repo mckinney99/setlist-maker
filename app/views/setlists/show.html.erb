@@ -1,12 +1,14 @@
 <div class="info">  
-  <p>Name: <%= @setlists.name %><br>
-  Comments: <%= @setlists.comments %><br>
+  <p>Name: <%= @setlist.name %><br>
+  Comments: <%= @setlist.comments %><br>
 </div>
 
-<% @setlists.songs.each do |s|%>
+
+
+<% @setlist.songs.each do |s|%>
 <li><%= s.title%><br>
 <a href="<%= s.song_url%>"target="_blank"> Link to listen </a><br>
-<% if current_user && current_user.id == @setlists.user_id %>
+<% if current_user && current_user.id == @setlist.user_id %>
 <%= s.comments %>
 
 <%end%>
@@ -15,11 +17,12 @@
 
 <%end%>
 
-<br><br>
 
 <% if current_user %>
-      <%= link_to "Edit setlist", edit_setlist_path %></p>
+      <%= link_to "Edit setlist", edit_setlist_path(@setlist) , :class => "edit_song" %></p>
     <% else %>
       <%= link_to "Create Your Own Account", new_user_registration_path %>
       </form>
 <% end %>
+
+

@@ -1,3 +1,17 @@
+# 1. clicking "view songs" on the home page renders the song index without moving to the songs url.
+
+2. clicking on next on the song show page sifts through the songs.
+
+# 3. clicking on a setlist on the setlist index page shows the songs dynamically
+
+4. clicking on *add song on the setlist edit page adds the song dynamically to the setlist
+
+5. *add song must use json data and formatters to show when the song was created and by whom.
+
+
+
+
+
 == README
 
 Setlist Maker is a simple app that allows bands and musicians to remotely collaborate on a setlist for a show, album, or any other type of song arrangment. 

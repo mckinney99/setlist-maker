@@ -4,6 +4,8 @@
 <%= render 'form', f: f %>
 <%= f.submit %>
 <%end%>
+<%= button_to "Delete Setlist", {:controller => :setlists, :action => 'destroy' }, :method => :delete %>
+
 
 <br><br>
 <%=form_tag(controller: "setlists", action: "add_song") do %>

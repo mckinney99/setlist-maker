@@ -6,7 +6,7 @@ Comments: <%= @songs.comments %><br>
 <a href="<%=@songs.song_url%>"target="_blank"> Link to song </a>
 
 <% if @current_user %>
-      <%= link_to "Edit song", [:edit, @songs] %></p>
+      <%= link_to "Edit song", edit_song %></p>
     <% else %>
       <form action="/songs/new" method="post">
         <%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
@@ -17,10 +17,9 @@ Comments: <%= @songs.comments %><br>
 
     <br><br>
 
-    <%= link_to 'Edit Song', edit_song_path %>
+    <%= link_to 'Edit Song', edit_song_path%>
 
     <br><br>
-    
-    <%= link_to 'New Song', new_song_path %>
-    
+ 
+
   </div>

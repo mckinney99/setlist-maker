@@ -1,9 +1,13 @@
 <p>All Setlists</p>
 
+
 <% current_user.setlists.each do |s| %>
-<a href="/setlists/<%=s.id%>">
+<a href="/setlists/<%=s.id%>", class="load_setlist_songs"><br>
 <%= s.name %><br>
 <%= s.comments %><br>
+
+<div class="load_songs"></div>
+
 
 <br><br>
 <%end%>

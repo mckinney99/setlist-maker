@@ -6,18 +6,28 @@ class SetlistsController < ApplicationController
     end
     
     def show
-        @setlists = Setlist.find(params[:id])
+        @setlist = Setlist.find(params[:id])
+        @song = Song.create
+        respond_to do |format|
+          format.html {render :show, :layout => false}
+          format.json {render json: @setlist.to_json}
+        end
     end
     
     def new
         @setlist = Setlist.new
+        
     end
     
     def create
         @setlist = Setlist.new(setlist_params)
         @setlist.user_id = current_user.id 
           if @setlist.save
-            redirect_to setlist_path(@setlist)
+            render :index
+         #   respond_to do |format|
+          #      format.html {render :show, :layout => false}
+           #     format.json {render json: @setlist.to_json}
+           # end
           else
             render :new
         end
@@ -49,6 +59,12 @@ class SetlistsController < ApplicationController
         @setlist = Setlist.find(params[:id])
         @setlist.songs.destroy(params[:song_id])
         render :edit
+    end
+
+    def destroy
+        @setlist = Setlist.find(params[:id])
+        @setlist.destroy
+        render :index
     end
 
 
