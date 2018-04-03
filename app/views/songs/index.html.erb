@@ -1,16 +1,12 @@
 <p>All Songs</p>
 
+<ul id="song-titles">
+</ul>
 
-<% current_user.songs.each do |s| %>
-<a href="/songs/<%=s.id%>", class="show_songs" </a>
-<%= s.title %> - <%= s.artist %><br>
-<br><br>
-<div class="show_song"></div>
-<%end%>
+<br>
 
-<%= link_to "New Song", song_new_path, :class => 'new_song_form' %>
+<%= link_to "New Song", { :controller => :songs, :action => :new }, class: "new_song_form"%>
 
 <br><br>
 
 <div class="new_song_form"></div>
-

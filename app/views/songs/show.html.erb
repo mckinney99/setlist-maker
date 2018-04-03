@@ -1,25 +1,23 @@
+<% if false %>
 <div class="info">
-  
-<p>Name: <%= @songs.title %><br>
-Artist: <%= @songs.artist %><br>
-Comments: <%= @songs.comments %><br>
-<a href="<%=@songs.song_url%>"target="_blank"> Link to song </a>
+
+<p>Name: <%= @song.title %><br>
+Artist: <%= @song.artist %><br>
+Comments: <%= @song.comments %><br>
+<a href="<%=@song.song_url%>"target="_blank"> Link to song </a>
 
 <% if @current_user %>
-      <%= link_to "Edit song", edit_song %></p>
-    <% else %>
+
       <form action="/songs/new" method="post">
         <%= tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token) %>
         <%= tag(:input, :type => "hidden", :name => :user_id, :value => current_user.id) %>
-        <%= tag(:input, :type => "hidden", :name => :song_id, :value => @songs.id) %>
+        <%= tag(:input, :type => "hidden", :name => :song_id, :value => @song.id) %>
       </form>
     <% end %>
 
     <br><br>
 
-    <%= link_to 'Edit Song', edit_song_path%>
-
     <br><br>
- 
 
   </div>
+  <% end %>
