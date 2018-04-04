@@ -31,8 +31,8 @@
  }
 
  function newSongForm() {
-     $("a.new_song_form").on("click", function(e) {
-         e.preventDefault();
+     $("a.link_to_song_form").on("click", function(event) {
+         event.preventDefault();
          $.ajax({
              method: "GET",
              url: this.href
@@ -41,6 +41,7 @@
          })
      })
  }
+
 
  function songSubmission() {
      $("div.new_song_form").on("submit", function(event) {
@@ -65,7 +66,6 @@
                $("#song_comments").val("");
                $("#song_song_url").val("");
                  $('#song-titles').append(`<li>${ data.song.songTitle }</li>`)
-                 
              }
          })
      })

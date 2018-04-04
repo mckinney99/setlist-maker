@@ -4,9 +4,7 @@ Rails.application.routes.draw do
   root 'home#index'
 
   get 'users/:id/setlists' => 'setlists#index'
-  #get '/songs' => 'songs#index'
-  #get '/songs/:id' => 'songs#show'
-  #get '/song/new' => 'songs#new'
+
   post 'songs/show' => 'songs#show'
   post 'song/new' => 'songs#show'
   post 'setlist/new' => 'setlists#show'
