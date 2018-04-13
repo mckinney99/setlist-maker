@@ -60,10 +60,7 @@ class Song {
 
 
   render(){
-     $("#the-pic").html(`<a href="songs/ + this.id + ">`);
-     $(".pic-caption").text(this.caption);
-     $("#js-next").data("pic", this.next_id);
-     $("#js-next").data("game", this.game_id);
+   debugger
    }
  }
 
