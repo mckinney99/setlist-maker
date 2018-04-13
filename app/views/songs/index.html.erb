@@ -1,12 +1,14 @@
 <p>All Songs</p>
+<% current_user.songs.each do |song| %>
+<li><a href="songs/<%=song.id %>"><%= song.title %></a><br></li>
+<li><%= song.song_url %></li><br><br>
+<% end %>
+<div id="song-titles"></div><br>
 
-<ul id="song-titles">
-</ul>
-
-<br>
 
 <%= link_to "New Song", { :controller => :songs, :action => :new }, class: "link_to_song_form" %>
 
-<br><br>
-
 <div class="new_song_form"></div>
+
+<br>
+<%= link_to "View Setlists", setlists_path, :class => "index_setlists"%>

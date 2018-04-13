@@ -2,9 +2,13 @@ class SetlistsController < ApplicationController
     skip_before_action :authenticate_user!, only: [:show]
 
     def index
-        @setlists = Setlist.all
+        @setlists = current_user.setlists.all
+        respond_to do |format|
+          format.html {render :index, :layout => false}
+          format.json {render json: @setlists.to_json}
+        end
     end
-    
+
     def show
         @setlist = Setlist.find(params[:id])
         @song = Song.create
@@ -13,15 +17,15 @@ class SetlistsController < ApplicationController
           format.json {render json: @setlist.to_json}
         end
     end
-    
+
     def new
         @setlist = Setlist.new
-        
+
     end
-    
+
     def create
         @setlist = Setlist.new(setlist_params)
-        @setlist.user_id = current_user.id 
+        @setlist.user_id = current_user.id
           if @setlist.save
             render :index
          #   respond_to do |format|
@@ -36,7 +40,7 @@ class SetlistsController < ApplicationController
     def edit
         @setlist = Setlist.find(params[:id])
     end
-    
+
     def update
         @setlist = Setlist.find(params[:id])
           if @setlist.update(setlist_params)
@@ -50,7 +54,7 @@ class SetlistsController < ApplicationController
         @setlist = Setlist.find(params[:id])
         @setlist_songs = SetlistSong.new
         @setlist_songs.song_id = params[:songs]["song_id"]
-        @setlist_songs.setlist_id = @setlist.id 
+        @setlist_songs.setlist_id = @setlist.id
         @setlist_songs.save
         render :edit
     end
@@ -77,7 +81,5 @@ class SetlistsController < ApplicationController
 
     def setlist_song_params
         params.require(:setlist_songs).permit(:setlist_id, :song_id)
-    end          
+    end
 end
-
-

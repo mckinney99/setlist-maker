@@ -1,25 +1,32 @@
 class SongsController < ApplicationController
 
     def index
-        @songs = Song.all
+        @songs = current_user.songs.all
        end
 
       def show
         @song = Song.find(params[:id])
-      end
-
-      def new
-        @song = Song.new
         respond_to do |format|
-          format.html {render :new, :layout => false}
+          format.html {render :show, :layout => false}
           format.json {render json: @song.to_json}
          end
       end
 
+      def new
+        @song = Song.new
+        render :new, :layout => false
+
+      end
+
       def create
-        @song = Song.new(song_params)
+        @song = current_user.songs.build(song_params)
         @song.save
-        render 'songs/show', :layout => false
+        #binding.pry
+        #render 'songs/show', :layout => false
+        respond_to do |format|
+          format.html {render :show, :layout => false}
+          format.json {render json: @song.to_json}
+         end
       end
 
       def new_song

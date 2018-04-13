@@ -1,72 +1,39 @@
  $(document).ready(function() {
      setlistShow();
-     songsShow();
-     newSongForm();
-     songSubmission();
+     // setlist();
  })
 
  function setlistShow() {
-     $("a.load_setlist_songs").on("click", function(e) {
+     $("a.index_setlists").on("click", function(e) {
          e.preventDefault();
          $.ajax({
              method: "GET",
-             url: this.href
+             url: `${this.href}.json`
          }).done(function(response) {
-             $("div.load_songs").html(response)
+         console.log(response)
+         res = [{}, {}]
+         res.sort()
+         res.forEach
+         // let set = new SetList(response)
+         set.id
+         `<li> ${set.id} </li>`
+             $("div.load_songs").html(set.renderHTML())
          })
      })
  }
 
- function songsShow() {
-     $(".show_songs").on("click", function(e) {
-         e.preventDefault();
+ // index = initially render through javascript
+ // has_many = setlist (onCLick) => setlist.song
 
-         $.ajax({
-             method: "GET",
-             url: this.href
-         }).done(function(response) {
-             $("div.show_song").html(response)
-         })
-     })
- }
-
- function newSongForm() {
-     $("a.link_to_song_form").on("click", function(event) {
-         event.preventDefault();
-         $.ajax({
-             method: "GET",
-             url: this.href
-         }).done(function(response) {
-             $("div.new_song_form").html(response)
-         })
-     })
- }
-
-
- function songSubmission() {
-     $("div.new_song_form").on("submit", function(event) {
-         event.preventDefault();
-         url = this.action
-         data = {
-             'authenticity_token': $("input[name='authenticity_token']").val(),
-             'song': {
-                 'songTitle': $("#song_title").val(),
-                 'songArtist': $("#song_artist").val(),
-                 'songComments': $("#song_comments").val(),
-                 'songSongURL': $("#song_song_url").val()
-             }
-         }
-         $.ajax({
-             type: "POST",
-             url: url,
-             data: data,
-             success: function(response) {
-               $("#song_title").val("");
-               $("#song_artist").val("");
-               $("#song_comments").val("");
-               $("#song_song_url").val("");
-                 $('#song-titles').append(`<li>${ data.song.songTitle }</li>`)
-             }
-         })
-     })
- }
+//
+// function setlist() {
+//   //attributes
+//   const setlistId = $("div.info").attr("data")
+//   $.get("/setlists/" + setlistId + ".json", function(data) {
+// debugger
+//   //functions
+//   function renderHTML() {
+//
+//   }
+// }
+// }

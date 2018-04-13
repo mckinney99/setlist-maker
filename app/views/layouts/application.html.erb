@@ -7,21 +7,20 @@
   <%= csrf_meta_tags %>
 
   <% if current_user %>
-    | Signed in as <%= current_user.email%> |  
-    
+    | Signed in as <%= current_user.email%> |
+
 <% end %>
-      <br><br>  
+      <br><br>
 <% if current_user %>
     <%= link_to "Sign out", destroy_user_session_path,:method => :delete %>
-    <%= link_to "View Setlists", setlists_path(current_user.setlists)%>
-    <%= link_to "View Songs", songs_path(current_user.songs)%>
+    <%= link_to "View Songs", songs_path, :class => "view_songs"%>
     <% else %>
     <%= link_to "Sign in", new_user_session_path %> |
-    <%= link_to "Sign up", new_user_registration_path %> | 
+    <%= link_to "Sign up", new_user_registration_path %> |
     <%= link_to "Sign in with Github", user_github_omniauth_authorize_path %>
 <% end %>
-    
-    
+
+
     <br><br>
 -----------------------------------------------------
 </head>

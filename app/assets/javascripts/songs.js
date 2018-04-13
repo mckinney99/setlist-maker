@@ -1,61 +1,71 @@
-/* function songSubmission() {
-    $("#new_song").on("submit", function(event) {
+$(document).ready(function() {
+    //songsShow();
+    newSongForm();
+    songSubmission();
+})
+
+function newSongForm() {
+    $("a.link_to_song_form").on("click", function(event) {
         event.preventDefault();
-
         $.ajax({
+            method: "GET",
+            url: this.href
+        }).done(function(response) {
+          console.log(response)
+            $("div.new_song_form").html(response)
+        })
+    })
+}
 
-            url: this.action,
-            method: 'POST',
-            data: $(this).serialize(),
+//still working on... 
+
+function songSubmission() {
+    $("div.new_song_form").on("submit", function(event) {
+        event.preventDefault();
+        url = this.action
+        data = {
+            'authenticity_token': $("input[name='authenticity_token']").val(),
+            'song': {
+                'title': $("#song_title").val(),
+                'artist': $("#song_artist").val(),
+                'comments': $("#song_comments").val(),
+                'song_url': $("#song_song_url").val()
+            }
+        }
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: data,
             success: function(response) {
-                $("#song_title").val("")
-                $("#load_setlist_songs").append(response)
+              $("#song_title").val("");
+              $("#song_artist").val("");
+              $("#song_comments").val("");
+              $("#song_song_url").val("");
+                // $('#song-titles').append(`<li><a href="songs/${data.song.id}">${data.song.title}</li>`);
+                // $('#song-titles').append(`<li><a href="${data.song.song_url}">Link to Listen</li> <br>`);
+                $("div.load_songs").html(renderHTML())
+                // $('#song-titles').append(`<a href="song/${data.song.id}"> ${data.song.title} </a>`)
             }
         })
     })
 }
 
-*
-/ */
+class Song {
+  constructor(artist, title, comments, song_url){
+    this.artist = artist
+    this.title = title
+    this.comments = comments
+    this.songUrl = song_url
+  }
 
 
+  render(){
+     $("#the-pic").html(`<a href="songs/ + this.id + ">`);
+     $(".pic-caption").text(this.caption);
+     $("#js-next").data("pic", this.next_id);
+     $("#js-next").data("game", this.game_id);
+   }
+ }
 
 
-
-
-
-
-
-
-
-/* $(function songSubmission() {
-    $("#new_song").on("submit", function(e) {
-
-        e.preventDefault();
-
-        url = this.action
-
-        data = {
-            'authenticity_token': $("input[name='authenticity_token']").val(),
-            'song': {
-                'songTitle': $("#song_title").val(),
-                'songArtist': $("#song_artist").val(),
-                'songComments': $("#song_comments").val(),
-                'songSong_url': $("#song_song_url").val()
-            }
-        };
-
-        $.ajax({
-
-            type: "POST",
-            url: url,
-            data: data,
-            success: function(response) {
-                $("#song_title").val("")
-                $("#load_setlist_songs").append(response)
-
-            }
-        });
-
-    })
-}) */
+//show songs render index through js -- js class songs object
