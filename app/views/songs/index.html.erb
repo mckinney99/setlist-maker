@@ -1,9 +1,16 @@
 <p>All Songs</p>
 <% current_user.songs.each do |song| %>
-<li><a href="songs/<%=song.id %>"><%= song.title %></a><br></li>
-<li><%= song.song_url %></li><br><br>
+<div id="song-<%= song.id %>">
+  <li><a class="song-link" data-id="<%= song.id %>" href="songs/<%=song.id %>"><%= song.title %></a><br></li>
+  <!-- <li><%= song.song_url %></li><br><br> -->
+  <li><a target="_blank" href="<%=song.song_url %>">Link to Listen</li>
+  <div id="song-<%= song.id %>-details">
+  </div>
+</div>
+<br><br>
 <% end %>
-<div id="song-titles"></div><br>
+<div class="song-titles"></div>
+<!-- <div id="song-titles"></div><br> -->
 
 
 <%= link_to "New Song", { :controller => :songs, :action => :new }, class: "link_to_song_form" %>

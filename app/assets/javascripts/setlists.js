@@ -1,10 +1,20 @@
  $(document).ready(function() {
      setlistShow();
-     // setlist();
  })
 
+ class SetList {
+   constructor(title, comments){
+     this.title = title
+     this.comments = comments
+   }
+
+   render(){
+     document.querySelector('#load_songs').innerHTML = `<div class="load_songs"></div>`
+   }
+ }
+
  function setlistShow() {
-     $("a.index_setlists").on("click", function(e) {
+     $(".index_setlists").on("click", function(e) {
          e.preventDefault();
          $.ajax({
              method: "GET",
@@ -14,10 +24,11 @@
          res = [{}, {}]
          res.sort()
          res.forEach
-         // let set = new SetList(response)
-         set.id
-         `<li> ${set.id} </li>`
-             $("div.load_songs").html(set.renderHTML())
+         debugger
+         let set = setlist(response)
+
+         `<li> ${set.title} </li>`
+             $(".load_songs").html(set.renderHTML(response))
          })
      })
  }

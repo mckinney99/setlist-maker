@@ -2,7 +2,50 @@ $(document).ready(function() {
     //songsShow();
     newSongForm();
     songSubmission();
+    showSong();
 })
+
+class Song {
+  constructor(artist, title, comments, song_url){
+    this.artist = artist
+    this.title = title
+    this.comments = comments
+    this.songUrl = song_url
+  }
+
+  render(response){
+    document.querySelector('.song-titles').innerHTML += `<a href="/songs/${this.song_id}">Song Title</a>`
+  }
+}
+
+function renderHTML(response) {
+
+  if (document.querySelector('.song-titles')) {
+
+    let id = response.id;
+
+    $.get(`/songs/${id}.json`, function(song){
+      $('.song-titles').append(`<li><a href="songs/${data.song.id}">${data.song.title}</li>`);
+      $('.song-titles').append(`<li><a href="${data.song.song_url}">Link to Listen</li> <br>`);
+
+    })
+  }
+}
+
+function showSong() {
+  $('.song-link').on('click', function(e) {
+    e.preventDefault()
+
+    let id = $(this).data("id")
+
+    $.get(`/songs/${id}.json`, function(song){
+      console.log(song)
+      $(`#song-${id}-details`).html('')
+      $(`#song-${id}-details`).append(`Arist: <li>${song.artist}</li>`)
+      $(`#song-${id}-details`).append(`Comments: <li>${song.comments}</li>`)
+    })
+  })
+}
 
 function newSongForm() {
     $("a.link_to_song_form").on("click", function(event) {
@@ -17,15 +60,20 @@ function newSongForm() {
     })
 }
 
-//still working on... 
+//still working on...
 
 function songSubmission() {
     $("div.new_song_form").on("submit", function(event) {
+
         event.preventDefault();
+
+        let id = $('div#song-id').data("id");
+
         url = this.action
         data = {
             'authenticity_token': $("input[name='authenticity_token']").val(),
             'song': {
+                'id': $("#song_id").val(),
                 'title': $("#song_title").val(),
                 'artist': $("#song_artist").val(),
                 'comments': $("#song_comments").val(),
@@ -34,38 +82,26 @@ function songSubmission() {
         }
         $.ajax({
             type: "POST",
-            url: url,
+            url: "/songs" + ".json",
             data: data,
             success: function(response) {
+              $("#song_id").val(id);
               $("#song_title").val("");
               $("#song_artist").val("");
               $("#song_comments").val("");
               $("#song_song_url").val("");
-                // $('#song-titles').append(`<li><a href="songs/${data.song.id}">${data.song.title}</li>`);
-                // $('#song-titles').append(`<li><a href="${data.song.song_url}">Link to Listen</li> <br>`);
-                $("div.load_songs").html(renderHTML())
-                // $('#song-titles').append(`<a href="song/${data.song.id}"> ${data.song.title} </a>`)
+
+                $("div.song-titles").html(renderHTML(response))
+
             }
         })
     })
 }
 
-class Song {
-  constructor(artist, title, comments, song_url){
-    this.artist = artist
-    this.title = title
-    this.comments = comments
-    this.songUrl = song_url
-  }
 
 
-  render(){
-     $("#the-pic").html(`<a href="songs/ + this.id + ">`);
-     $(".pic-caption").text(this.caption);
-     $("#js-next").data("pic", this.next_id);
-     $("#js-next").data("game", this.game_id);
-   }
- }
+
+
 
 
 //show songs render index through js -- js class songs object

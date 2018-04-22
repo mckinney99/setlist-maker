@@ -2,6 +2,10 @@ class SongsController < ApplicationController
 
     def index
         @songs = current_user.songs.all
+        respond_to do |format|
+          format.html {render :index, :layout => true}
+          format.json {render json: @songs.to_json}
+         end
        end
 
       def show
