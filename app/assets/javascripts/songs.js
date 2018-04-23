@@ -97,11 +97,3 @@ function songSubmission() {
         })
     })
 }
-
-
-
-
-
-
-
-//show songs render index through js -- js class songs object
