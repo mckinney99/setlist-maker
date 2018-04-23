@@ -26,7 +26,7 @@ $.map(setlists, function(val) {
   let set = val
   console.log(set.name)
   let id = val.id
-  
+
       $(`.load_songs`).html('')
       $(`.load_songs`).append(`<li><a href="/setlists/${id}">${set.name}</a>`)
       $(`.load_songs`).append(`<li>${set.comments}`)
