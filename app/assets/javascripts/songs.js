@@ -26,7 +26,7 @@ function renderHTML(response) {
 
     $.get(`/songs/${id}.json`, function(song){
       $('.song-titles').append(`<li><a href="songs/${data.song.id}">${data.song.title}</li>`);
-      $('.song-titles').append(`<li><a href="${data.song.song_url}">Link to Listen</li> <br>`);
+      $('.song-titles').append(`<li><a href="${data.song.song_url}" target="_blank" >Link to Listen</li> <br>`);
 
     })
   }

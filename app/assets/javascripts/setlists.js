@@ -9,42 +9,43 @@
    }
 
    render(){
-     document.querySelector('#load_songs').innerHTML = `<div class="load_songs"></div>`
+     document.querySelector('.load_songs').innerHTML += `<a href="/setlist/${this.setlist_id}">Song Title</a>`
    }
  }
 
- function setlistShow() {
-     $(".index_setlists").on("click", function(e) {
-         e.preventDefault();
-         $.ajax({
-             method: "GET",
-             url: `${this.href}.json`
-         }).done(function(response) {
-         console.log(response)
-         res = [{}, {}]
-         res.sort()
-         res.forEach
-         debugger
-         let set = setlist(response)
 
-         `<li> ${set.title} </li>`
-             $(".load_songs").html(set.renderHTML(response))
-         })
-     })
+  function setlistShow() {
+    $(".index_setlists").on("click", function(e) {
+        e.preventDefault();
+
+    $.get(this.href + ".json", function(setlist){
+      console.log(setlist)
+
+var setlists = $.makeArray(setlist)
+$.map(setlists, function(val) {
+  let set = val
+  console.log(set.name)
+  let id = val.id
+  
+      $(`.load_songs`).html('')
+      $(`.load_songs`).append(`<li><a href="/setlists/${id}">${set.name}</a>`)
+      $(`.load_songs`).append(`<li>${set.comments}`)
+      })
+    })
+  })
  }
 
- // index = initially render through javascript
- // has_many = setlist (onCLick) => setlist.song
 
+
+//  function setlistShow() {
+//    $(".index_setlists").on("click", function(e) {
+//        e.preventDefault();
 //
-// function setlist() {
-//   //attributes
-//   const setlistId = $("div.info").attr("data")
-//   $.get("/setlists/" + setlistId + ".json", function(data) {
-// debugger
-//   //functions
-//   function renderHTML() {
+//    $.get(this.href, function(setlist){
+//      console.log(setlist)
 //
-//   }
-// }
+//      $(`.load_songs`).html('')
+//      $(`.load_songs`).append(`${setlist}`)
+//    })
+//  })
 // }

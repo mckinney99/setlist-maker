@@ -1,11 +1,13 @@
-<p>All Setlists</p>
+<p>Your Setlists</p>
 
 <% current_user.setlists.each do |s| %>
+<div id="setlist-<%= s.id %>" data-id="<%= s.id %>">
 <a href="/setlists/<%=s.id%>", class="load_setlist_songs"><br>
 <%= s.name %><br>
 <%= s.comments %><br>
+</div> <br>
 
-<div class="load_songs"></div>
+
 
 
 <br><br>
