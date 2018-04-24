@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
 
-  get 'home/index'
-  root 'home#index'
+  root 'songs#index'
 
   get 'users/:id/setlists' => 'setlists#index'
 
@@ -20,11 +19,12 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
+  resources :songs
 
   resources :setlists do
     resources :songs, except: [:index]
   end
 
-  resources :songs
+
 
 end

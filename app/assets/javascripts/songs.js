@@ -1,5 +1,4 @@
 $(document).ready(function() {
-    //songsShow();
     newSongForm();
     songSubmission();
     showSong();
@@ -12,9 +11,8 @@ class Song {
     this.comments = comments
     this.songUrl = song_url
   }
-
   render(response){
-    document.querySelector('.song-titles').innerHTML += `<a href="/songs/${this.song_id}">Song Title</a>`
+    document.querySelector('.song-titles').innerHTML += `<a href="/songs/${id}">Song Title</a>`
   }
 }
 
@@ -25,8 +23,9 @@ function renderHTML(response) {
     let id = response.id;
 
     $.get(`/songs/${id}.json`, function(song){
-      $('.song-titles').append(`<li><a href="songs/${data.song.id}">${data.song.title}</li>`);
-      $('.song-titles').append(`<li><a href="${data.song.song_url}" target="_blank" >Link to Listen</li> <br>`);
+      $('.song-titles').prepend(`<li><a href="${data.song.song_url}" target="_blank" >Link to Listen</li> <br>`);
+      $('.song-titles').prepend(`<li><a href="songs/${id}">${data.song.title}</a></li>`);
+
 
     })
   }
@@ -40,9 +39,11 @@ function showSong() {
 
     $.get(`/songs/${id}.json`, function(song){
       console.log(song)
+
       $(`#song-${id}-details`).html('')
-      $(`#song-${id}-details`).append(`Arist: <li>${song.artist}</li>`)
-      $(`#song-${id}-details`).append(`Comments: <li>${song.comments}</li>`)
+      $(`#song-${id}-details`).prepend(`Comments: <li>${song.comments}</li>`)
+      $(`#song-${id}-details`).prepend(`Artist: <li>${song.artist}</li>`)
+
     })
   })
 }

@@ -1,10 +1,13 @@
-<% if false %>
+<!-- <% if false %> -->
 <div class="info">
 
-<p>Name: <%= @song.title %><br>
+  <p>doijdoijdoijd</p>
+
+Name: <%= @song.title %><br>
 Artist: <%= @song.artist %><br>
 Comments: <%= @song.comments %><br>
 <a href="<%=@song.song_url%>"target="_blank"> Link to song </a>
+
 
 
 <% if @current_user %>
@@ -15,11 +18,6 @@ Comments: <%= @song.comments %><br>
         <%= tag(:input, :type => "hidden", :name => :song_id, :value => @song.id) %>
       </form>
     <% end %>
-    
-
-    <br><br>
-
-    <br><br>
 
   </div>
-  <% end %>
+ <% end %>

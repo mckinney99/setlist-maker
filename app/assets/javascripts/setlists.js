@@ -1,5 +1,6 @@
  $(document).ready(function() {
      setlistShow();
+    
  })
 
  class SetList {
@@ -12,7 +13,6 @@
      document.querySelector('.load_songs').innerHTML += `<a href="/setlist/${this.setlist_id}">Song Title</a>`
    }
  }
-
 
   function setlistShow() {
     $(".index_setlists").on("click", function(e) {

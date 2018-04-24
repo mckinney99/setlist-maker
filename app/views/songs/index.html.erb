@@ -1,22 +1,31 @@
-<p>Your Songs</p>
-<% current_user.songs.each do |song| %>
-<div id="song-<%= song.id %>">
-  <li><a class="song-link" data-id="<%= song.id %>" href="songs/<%=song.id %>"><%= song.title %></a><br></li>
-  <!-- <li><%= song.song_url %></li><br><br> -->
-  <li><a href="<%=song.song_url %>" target="_blank" >Link to Listen</li>
-  <div id="song-<%= song.id %>-details">
+<div class="row">
+  <div class="col-md-6">
+
+    <%= link_to "New Song", { :controller => :songs, :action => :new }, class: "link_to_song_form" %>
+    <div class="new_song_form"></div><br>
+    <p>Your Songs</p>
+    <div class="song-titles"></div>
+<br>
+
+
+
+    <% current_user.songs.each do |song| %>
+      <div id="song-<%= song.id %>">
+        <li><a class="song-link" data-id="<%= song.id %>" href="songs/<%=song.id %>"><%= song.title %></a><br></li>
+        <!-- <li><%= song.song_url %></li><br><br> -->
+        <li><a href="<%=song.song_url %>" target="_blank" >Link to Listen</li>
+          <div id="song-<%= song.id %>-details"></div>
+      </div>
+    <br><br>
+    <% end %>
+  </div>
+
+
+
+  <div class="col-md-6">
+    <br>
+    <%= link_to "View Setlists", setlists_path, :class => "index_setlists"%>
+
+      <div class="load_songs"></div>
   </div>
 </div>
-<br><br>
-<% end %>
-<div class="song-titles"></div>
-
-
-<%= link_to "New Song", { :controller => :songs, :action => :new }, class: "link_to_song_form" %>
-
-<div class="new_song_form"></div>
-
-<br>
-<%= link_to "View Setlists", setlists_path, :class => "index_setlists"%>
-
-<div class="load_songs"></div>
