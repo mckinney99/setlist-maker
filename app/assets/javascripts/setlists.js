@@ -18,13 +18,12 @@
   function setlistShow() {
     $(".index_setlists").on("click", function(e) {
       e.preventDefault();
-
-    $.get(this.href + ".json", function(setlists){
-
-    setlists.forEach(function(setlist) {
-      let sl = new SetList(setlist.id, setlist.name, setlist.comments, setlist.songs)
-      console.log(sl)
-      $(`.setlist-show`).append(sl.renderName())
+      $('.setlist-show').html('')
+      
+      $.get(this.href + ".json", function(setlists){
+        setlists.forEach(function(setlist) {
+          let sl = new SetList(setlist.id, setlist.name, setlist.comments, setlist.songs)
+          $(`.setlist-show`).append(sl.renderName())
       })
     })
   })
