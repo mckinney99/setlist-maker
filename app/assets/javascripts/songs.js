@@ -18,17 +18,17 @@ class Song {
     return `<li>${this.title}<br>`
   }
 
-  renderForm(id) {
+  renderForm() {
 
-       //let id = this.id;
+        return `<li><a class="song-link" data-id=${this.id} href="songs/${this.id}">${this.title}</a></li>
+                <li><a href="${this.song_url}" target="_blank" >Link to Listen</li>
+                 <br>`
+  }
 
-      $.get(`/songs/${this.id}.json`, function(song){
-
-        return `<li><a href="${data.song.song_url}" target="_blank" >Link to Listen</li> <br>`;
-        return `<li><a href="songs/${id}">${data.song.title}</a></li>`;
-
-
-    })
+  renderSong() {
+    return `<br> <a href="songs/${this.id}/edit">Edit Song</a> <br>
+            Comments: <li>${this.comments}</li> <br>
+            Artist: <li>${this.artist}</li>`
   }
 }
 
@@ -48,34 +48,26 @@ function setlistSongs() {
   })
 }
 
-// function renderHTML(response) {
-//
-//   if (document.querySelector('.song-titles')) {
-//
-//     let id = response.id;
-//
-//     $.get(`/songs/${id}.json`, function(song){
-//
-//       $('.song-titles').prepend(`<li><a href="${data.song.song_url}" target="_blank" >Link to Listen</li> <br>`);
-//       $('.song-titles').prepend(`<li><a href="songs/${id}">${data.song.title}</a></li>`);
-//
-//     })
-//   }
-// }
-
 function showSong() {
-  $('.song-link').on('click', function(e) {
+  $("body").on('click', '.song-link', function (e) {
+  // $('.song-link').on('click', function(e) {
     e.preventDefault()
 
-    let id = $(this).data("id")
+          // let id = $(this).data("id")
+    //
+    // $.get(`/songs/${id}.json`, function(song){
+    //   console.log(song)
+    //
+    //   $(`#song-${id}-details`).html('')
+    //   $(`#song-${id}-details`).prepend(`<a href="songs/${id}/edit">Edit Song</a>`)
+    //   $(`#song-${id}-details`).prepend(`Comments: <li>${song.comments}</li>`)
+    //   $(`#song-${id}-details`).prepend(`Artist: <li>${song.artist}</li>`)
 
-    $.get(`/songs/${id}.json`, function(song){
-      console.log(song)
+    $.get(this.href + ".json", function(song) {
 
-      $(`#song-${id}-details`).html('')
-      $(`#song-${id}-details`).prepend(`<a href="songs/${id}/edit">Edit Song</a>`)
-      $(`#song-${id}-details`).prepend(`Comments: <li>${song.comments}</li>`)
-      $(`#song-${id}-details`).prepend(`Artist: <li>${song.artist}</li>`)
+        let sl = new Song(song.id, song.artist, song.title, song.comments, song.songUrl)
+        console.log(song)
+        $(`#song-${song.id}-details`).prepend(sl.renderSong())
 
     })
   })
@@ -94,15 +86,12 @@ function newSongForm() {
     })
   }
 
-
-//still working on...
-
 function songSubmission() {
     $("div.new_song_form").on("submit", function(event) {
 
         event.preventDefault();
 
-        let id = $('div#song-id').data("id");
+        let songid = $('div#song-id').data("id");
 
         url = this.action
         data = {
@@ -119,19 +108,17 @@ function songSubmission() {
             type: "POST",
             url: "/songs" + ".json",
             data: data,
-            success: function(response) {
-              $("#song_id").val(id);
-              $("#song_title").val("");
-              $("#song_artist").val("");
-              $("#song_comments").val("");
-              $("#song_song_url").val("");
+            success: function(song) {
+            let id = $("#song_id").val(songid);
+            let title = $("#song_title").val("");
+            let artist = $("#song_artist").val("");
+            let comments = $("#song_comments").val("");
+            let song_url = $("#song_song_url").val("");
 
-              data(function(song) {
-              let sl = new Song(data.id, data.artist, data.title, data.comments, data.songUrl)
-              console.log(song)
+            let sl = new Song(song.id, song.artist, song.title, song.comments, song.songUrl)
 
-                $("div.song-titles").html(sl.renderForm(response))
-              })
+            $('.song-titles').prepend(sl.renderForm(id));
+
             }
         })
     })

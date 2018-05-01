@@ -9,7 +9,7 @@
 
 
 
-    <% current_user.songs.each do |song| %>
+    <% current_user.songs.reverse.each do |song| %>
       <div id="song-<%= song.id %>">
         <li><a class="song-link" data-id="<%= song.id %>" href="songs/<%=song.id %>"><%= song.title %></a><br></li>
         <!-- <li><%= song.song_url %></li><br><br> -->
