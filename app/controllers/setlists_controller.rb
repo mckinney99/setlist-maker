@@ -5,16 +5,16 @@ class SetlistsController < ApplicationController
         @setlists = current_user.setlists.all
         respond_to do |format|
           format.html {render :index, :layout => false}
-          format.json {render json: @setlists.to_json}
+          format.json {render json: @setlists}
         end
     end
 
     def show
         @setlist = Setlist.find(params[:id])
-        @song = Song.create
+        #@song = Song.create
         respond_to do |format|
           format.html {render :show, :layout => false}
-          format.json {render json: @setlist.to_json}
+          format.json {render json: @setlist}
         end
     end
 
@@ -28,10 +28,6 @@ class SetlistsController < ApplicationController
         @setlist.user_id = current_user.id
           if @setlist.save
             render :index
-         #   respond_to do |format|
-          #      format.html {render :show, :layout => false}
-           #     format.json {render json: @setlist.to_json}
-           # end
           else
             render :new
         end

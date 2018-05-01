@@ -2,34 +2,66 @@ $(document).ready(function() {
     newSongForm();
     songSubmission();
     showSong();
+    setlistSongs();
 })
 
 class Song {
-  constructor(artist, title, comments, song_url){
+  constructor(id, artist, title, comments, songUrl) {
+    this.id = id
     this.artist = artist
     this.title = title
     this.comments = comments
-    this.songUrl = song_url
+    this.songUrl = songUrl
   }
-  render(response){
-    document.querySelector('.song-titles').innerHTML += `<a href="/songs/${id}">Song Title</a>`
+
+  renderSetListSongs() {
+    return `<li>${this.title}<br>`
   }
-}
 
-function renderHTML(response) {
+  renderForm(id) {
 
-  if (document.querySelector('.song-titles')) {
+       //let id = this.id;
 
-    let id = response.id;
+      $.get(`/songs/${this.id}.json`, function(song){
 
-    $.get(`/songs/${id}.json`, function(song){
-      $('.song-titles').prepend(`<li><a href="${data.song.song_url}" target="_blank" >Link to Listen</li> <br>`);
-      $('.song-titles').prepend(`<li><a href="songs/${id}">${data.song.title}</a></li>`);
+        return `<li><a href="${data.song.song_url}" target="_blank" >Link to Listen</li> <br>`;
+        return `<li><a href="songs/${id}">${data.song.title}</a></li>`;
 
 
     })
   }
 }
+
+function setlistSongs() {
+  $("body").on('click', '.setlist-title', function (e) {
+    e.preventDefault();
+
+    $.get(this.href + ".json", function(setlists) {
+
+      setlists.songs.forEach(function(song) {
+      let sl = new Song(song.id, song.artist, song.title, song.comments, song.songUrl)
+      console.log(song)
+      $(`.load-songs`).append(sl.renderSetListSongs())
+
+      })
+    })
+  })
+}
+
+// function renderHTML(response) {
+//
+//   if (document.querySelector('.song-titles')) {
+//
+//     let id = response.id;
+//
+//     $.get(`/songs/${id}.json`, function(song){
+//
+//       $('.song-titles').prepend(`<li><a href="${data.song.song_url}" target="_blank" >Link to Listen</li> <br>`);
+//       $('.song-titles').prepend(`<li><a href="songs/${id}">${data.song.title}</a></li>`);
+//
+//     })
+//   }
+// }
 
 function showSong() {
   $('.song-link').on('click', function(e) {
@@ -41,6 +73,7 @@ function showSong() {
       console.log(song)
 
       $(`#song-${id}-details`).html('')
+      $(`#song-${id}-details`).prepend(`<a href="songs/${id}/edit">Edit Song</a>`)
       $(`#song-${id}-details`).prepend(`Comments: <li>${song.comments}</li>`)
       $(`#song-${id}-details`).prepend(`Artist: <li>${song.artist}</li>`)
 
@@ -59,7 +92,8 @@ function newSongForm() {
             $("div.new_song_form").html(response)
         })
     })
-}
+  }
+
 
 //still working on...
 
@@ -92,8 +126,12 @@ function songSubmission() {
               $("#song_comments").val("");
               $("#song_song_url").val("");
 
-                $("div.song-titles").html(renderHTML(response))
+              data(function(song) {
+              let sl = new Song(data.id, data.artist, data.title, data.comments, data.songUrl)
+              console.log(song)
 
+                $("div.song-titles").html(sl.renderForm(response))
+              })
             }
         })
     })

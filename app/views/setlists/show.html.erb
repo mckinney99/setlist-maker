@@ -3,21 +3,20 @@
   Comments: <%= @setlist.comments %><br>
 </div>
 
-
-
+<div id="setlist-<%=@setlist.id%>-songs">
 <% @setlist.songs.each do |s|%>
-<div id=setlist_song_show>
-<li><%= s.title%><br>
-<a href="<%= s.song_url%>"target="_blank"> Link to listen </a><br>
-<% if current_user && current_user.id == @setlist.user_id %>
-<%= s.comments %>
-<%end%>
-</div>
+  <div id="song-<%=s.id%>">
+      <li><%= s.title%><br>
+      <a href="<%= s.song_url%>"target="_blank"> Link to listen </a><br>
+        <% if current_user && current_user.id == @setlist.user_id %>
+      <%= s.comments %>
+    <%end%>
+  </div>
 
 <br><br>
 
 <%end%>
-
+</div>
 
 <% if current_user %>
       <%= link_to "Edit setlist", edit_setlist_path(@setlist) , :class => "edit_song" %></p>

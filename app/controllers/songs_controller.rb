@@ -4,7 +4,7 @@ class SongsController < ApplicationController
         @songs = current_user.songs.all
         respond_to do |format|
           format.html {render :index, :layout => true}
-          format.json {render json: @songs.to_json}
+          format.json {render json: @songs}
          end
        end
 
@@ -13,7 +13,7 @@ class SongsController < ApplicationController
 
          respond_to do |format|
            format.html {render :show, layout: false}
-           format.json {render json: @song.to_json}
+           format.json {render json: @song}
          end
       end
 
@@ -27,11 +27,9 @@ class SongsController < ApplicationController
       def create
         @song = current_user.songs.build(song_params)
         @song.save
-        #binding.pry
-        #render 'songs/show', :layout => false
         respond_to do |format|
           format.html {render :show, :layout => false}
-          format.json {render json: @song.to_json}
+          format.json {render json: @song}
          end
       end
 
@@ -40,15 +38,19 @@ class SongsController < ApplicationController
         @setlist_song = SetlistSong.create(song_id: @song.id, setlist_id: params[:id])
         @setlist_song.save
         respond_to do |format|
-          format.html {render :index, :layout => true}
-          format.json {render json: @song.to_json}
+          format.html {render :index, layout: true}
+          format.json {render json: @song}
          end
 
     end
 
       def edit
         @song = Song.find(params[:id])
-        render :edit
+
+        respond_to do |format|
+          format.html {render :edit, layout: true}
+          format.json {render json: @song}
+        end
       end
 
       def update

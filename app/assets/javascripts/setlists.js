@@ -1,51 +1,31 @@
  $(document).ready(function() {
      setlistShow();
-    
  })
 
  class SetList {
-   constructor(title, comments){
-     this.title = title
+   constructor(id, name, comments, songs){
+     this.id = id
+     this.name = name
      this.comments = comments
+     this.songs = songs
    }
 
-   render(){
-     document.querySelector('.load_songs').innerHTML += `<a href="/setlist/${this.setlist_id}">Song Title</a>`
+   renderName(){
+     return `<a class="setlist-title" href="/setlists/${this.id}">${this.name}</a> - ${this.songs.length} songs <br>`
    }
  }
 
   function setlistShow() {
     $(".index_setlists").on("click", function(e) {
-        e.preventDefault();
+      e.preventDefault();
 
-    $.get(this.href + ".json", function(setlist){
-      console.log(setlist)
+    $.get(this.href + ".json", function(setlists){
 
-var setlists = $.makeArray(setlist)
-$.map(setlists, function(val) {
-  let set = val
-  console.log(set.name)
-  let id = val.id
-
-      $(`.load_songs`).html('')
-      $(`.load_songs`).append(`<li><a href="/setlists/${id}">${set.name}</a>`)
-      $(`.load_songs`).append(`<li>${set.comments}`)
+    setlists.forEach(function(setlist) {
+      let sl = new SetList(setlist.id, setlist.name, setlist.comments, setlist.songs)
+      console.log(sl)
+      $(`.setlist-show`).append(sl.renderName())
       })
     })
   })
  }
-
-
-
-//  function setlistShow() {
-//    $(".index_setlists").on("click", function(e) {
-//        e.preventDefault();
-//
-//    $.get(this.href, function(setlist){
-//      console.log(setlist)
-//
-//      $(`.load_songs`).html('')
-//      $(`.load_songs`).append(`${setlist}`)
-//    })
-//  })
-// }
