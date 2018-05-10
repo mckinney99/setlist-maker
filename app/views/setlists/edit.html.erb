@@ -1,19 +1,26 @@
-<p>Edit Setlist</p>
+<div class="col-xs-2"></div>
+  <div class ="col-xs-8">
 
-<%= form_for (@setlist) do |f| %>
-<%= render 'form', f: f %>
-<%= f.submit %>
-<%end%>
-<%= button_to "Delete Setlist", {:controller => :setlists, :action => 'destroy' }, :method => :delete %>
+    <p>Edit Setlist</p>
+
+    <%= form_for (@setlist) do |f| %>
+      <%= render 'form', f: f %>
+      <%= f.submit %>
+    <%end%>
+    <%= button_to "Delete Setlist", {:controller => :setlists, :action => 'destroy' }, :method => :delete %>
 
 
-<br><br>
-<%=form_tag(controller: "setlists", action: "add_song") do %>
-<%=select('songs', 'song_id', options_for_select(current_user.songs.collect{ |s| [s.title, s.id] })) %>
-<%= submit_tag('Add Song To Setlist')  %>
-<%end%>
+    <br><br>
+    <%=form_tag(controller: "setlists", action: "add_song") do %>
+      <%=select('songs', 'song_id', options_for_select(current_user.songs.collect{ |s| [s.title, s.id] })) %>
+      <%= submit_tag('Add Song To Setlist')  %>
+    <%end%>
 
-<% @setlist.songs.each do |s|%>
-<li> <%= s.title%> <%= button_to "delete", {:controller => :setlists, :song_id => s.id, :action => 'destroy_song' }, :method => :delete %>
-<br>
-<%end%>
+    <% @setlist.songs.each do |s|%>
+      <li> <%= s.title%> <%= button_to "delete", {:controller => :setlists, :song_id => s.id, :action => 'destroy_song' }, :method => :delete %>
+      <br>
+    <%end%>
+
+  </div>
+
+<div class="col-xs-2"></div>

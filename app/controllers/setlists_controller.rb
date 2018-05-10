@@ -11,7 +11,6 @@ class SetlistsController < ApplicationController
 
     def show
         @setlist = Setlist.find(params[:id])
-        #@song = Song.create
         respond_to do |format|
           format.html {render :show, :layout => false}
           format.json {render json: @setlist}
@@ -27,7 +26,7 @@ class SetlistsController < ApplicationController
         @setlist = Setlist.new(setlist_params)
         @setlist.user_id = current_user.id
           if @setlist.save
-            render :index
+            redirect_to songs_path
           else
             render :new
         end
@@ -40,7 +39,7 @@ class SetlistsController < ApplicationController
     def update
         @setlist = Setlist.find(params[:id])
           if @setlist.update(setlist_params)
-            redirect_to @setlist
+            redirect_to songs_path
           else
             render :edit
         end

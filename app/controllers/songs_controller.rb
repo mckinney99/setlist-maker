@@ -3,14 +3,13 @@ class SongsController < ApplicationController
     def index
         @songs = current_user.songs.all
         respond_to do |format|
-          format.html {render :index, :layout => true}
+          format.html {render :index}
           format.json {render json: @songs}
          end
        end
 
       def show
         @song = Song.find(params[:id])
-
          respond_to do |format|
            format.html {render :show, layout: false}
            format.json {render json: @song}
@@ -21,7 +20,6 @@ class SongsController < ApplicationController
       def new
         @song = Song.new
         render :new, :layout => false
-
       end
 
       def create

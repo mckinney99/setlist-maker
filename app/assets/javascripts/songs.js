@@ -15,12 +15,12 @@ class Song {
   }
 
   renderSetListSongs() {
-    return `<li>${this.title}<br>`
+    return `<li>${this.title} - <a href="${this.songUrl}" target="_blank" >Link</a><br>`
   }
 
   renderForm() {
         return `<li><a class="song-link" data-id=${this.id} href="songs/${this.id}">${this.title}</a></li>
-                <li><a href="${this.song_url}" target="_blank" >Link to Listen</li>
+                <li><a href="${this.songUrl}" target="_blank" >Link to Listen</a></li>
                  <br> <div song-id> </div>`
   }
 
@@ -34,11 +34,14 @@ class Song {
 function setlistSongs() {
   $(".setlist-show").on('click', '.setlist-title', function (e) {
     e.preventDefault();
-    $('.load-songs').html('')
+
     $.get(this.href + ".json", function(setlists) {
+      let setlistId = setlists.id;
+      $(`.setlist-${setlistId}`).html('')
       setlists.songs.forEach(function(song) {
       let sl = new Song(song.id, song.artist, song.title, song.comments, song.songUrl)
-      $(`.load-songs`).append(sl.renderSetListSongs())
+      $(`.setlist-${setlistId}`).append(sl.renderSetListSongs())
+      debugger
       })
     })
   })
@@ -49,7 +52,6 @@ function showSong() {
     e.preventDefault()
     $.get(this.href + ".json", function(song) {
         let sl = new Song(song.id, song.artist, song.title, song.comments, song.songUrl)
-
         $(`#song-${song.id}-details`).prepend(sl.renderSong())
     })
   })
@@ -58,7 +60,6 @@ function showSong() {
 function newSongForm() {
     $("a.link_to_song_form").on("click", function(event) {
         event.preventDefault();
-
         $.ajax({
             method: "GET",
             url: this.href
@@ -86,16 +87,17 @@ function songSubmission() {
                 'song_url': $("#song_song_url").val()
             }
         }
+
         $.ajax({
             type: "POST",
             url: "/songs" + ".json",
             data: data,
             success: function(song) {
-              let id = $("#song_id").val(songid);
-              let title = $("#song_title").val("");
-              let artist = $("#song_artist").val("");
-              let comments = $("#song_comments").val("");
-              let song_url = $("#song_song_url").val("");
+              $("#song_id").val(songid);
+              $("#song_title").val("");
+              $("#song_artist").val("");
+              $("#song_comments").val("");
+              $("#song_song_url").val("");
 
               let sl = new Song(song.id, song.artist, song.title, song.comments, song.songUrl)
               $('.song-titles').prepend(sl.renderForm(id));

@@ -20,17 +20,16 @@
           <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href="/">Setlist Maker</a>
+
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="/">Home</a></li>
 
-              <li><a href="/"></a></li>
 
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <% if current_user %>
-          <li><p>Signed in as <%= current_user.email%><p></li>
+          <li class="navbar-text"><p>Signed in as <%= current_user.email%><p></li>
           <li><%= link_to "Sign out", destroy_user_session_path,:method => :delete %></li>
             <% else %>
           <li><%= link_to "Sign up", new_user_registration_path %></li>
@@ -41,25 +40,6 @@
       </div>
     </div>
   </nav>
-
-
-
-
-
-
-  <!-- <% if current_user %>
-    | Signed in as <%= current_user.email%> | -->
-
-<!-- <% end %> -->
-      <!-- <br><br>
-<% if current_user %>
-    <%= link_to "Sign out", destroy_user_session_path,:method => :delete %>
-    <%= link_to "View Songs", songs_path, :class => "view_songs"%>
-    <% else %>
-    <%= link_to "Sign in", new_user_session_path %> |
-    <%= link_to "Sign up", new_user_registration_path %> |
-    <%= link_to "Sign in with Github", user_github_omniauth_authorize_path %>
-<% end %> -->
 
 </head>
 <body>
