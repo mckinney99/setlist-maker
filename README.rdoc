@@ -1,24 +1,10 @@
-# 1. clicking "view songs" on the home page renders the song index without moving to the songs url.
-
-2. clicking on next on the song show page sifts through the songs.
-
-# 3. clicking on a setlist on the setlist index page shows the songs dynamically
-
-4. clicking on *add song on the setlist edit page adds the song dynamically to the setlist
-
-5. *add song must use json data and formatters to show when the song was created and by whom.
-
-
-
-
-
 == README
 
-Setlist Maker is a simple app that allows bands and musicians to remotely collaborate on a setlist for a show, album, or any other type of song arrangment. 
+Setlist Maker is a simple app that allows people to remotely collaborate on a setlist of songs.
 
-Simply create an account, add new songs with a link so your friends and bandmates can hear the song. Once a new song is created, you can create a new setlist and add those songs accordingly.
+Simply create an account using github, or your own email, add new songs with a link so your friends and bandmates can hear the song. Once a new song is created, you can create a new setlist and add those songs accordingly.
 
-Users can share their setlists with anybody, however only a the creator of the setlist can edit and add songs.
+Users can share their setlists with anybody, however only the creator of the setlist can edit and add songs.
 
 GETTING STARTED:
 
@@ -30,6 +16,6 @@ GETTING STARTED:
 
 Please file any issues with a pull request. Thank you!
 
-Enjoy! 
+Enjoy!
 
 [MIT](https://github.com/mckinney99/setlist-maker/blob/master/LICENSE.md

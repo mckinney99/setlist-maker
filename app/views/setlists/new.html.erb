@@ -1,8 +1,7 @@
-<div class="col-xs-2"></div>
+<!-- <div class="col-xs-2"></div>
   <div class="col-xs-8">
 
-    <h2>New Setlist</h2>
-
+    <h2>New Setlist</h2> -->
     <%= form_for @setlist do |f|%>
       <%= render 'form', f: f %>
       <%= f.fields_for :songs, @setlist.songs.build do |r| %>
@@ -13,6 +12,6 @@
       <%end%>
     <%end%>
 
-  </div>
+  <!-- </div>
 
-<div class="col-xs-2"></div>
+<div class="col-xs-2"></div> -->

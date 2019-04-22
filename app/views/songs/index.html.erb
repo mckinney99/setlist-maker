@@ -1,32 +1,18 @@
-<div class="flex-row">
-  <div class="col-xs-1"></div>
-    <div class="col-xs-5">
-
-      <%= link_to "New Song", { :controller => :songs, :action => :new }, class: "link_to_song_form" %>
-      <div class="new_song_form"></div><br>
-      <p>Your Songs</p>
-      <div class="song-titles"></div>
+<div class="song-titles">
   <br>
+  <% current_user.songs.reverse.each do |song| %>
 
-      <% current_user.songs.reverse.each do |song| %>
-        <div id="song-<%= song.id %>">
-          <li><a class="song-link" data-id="<%= song.id %>" href="songs/<%=song.id %>"><%= song.title %></a><br></li>
-
-          <li><a href="<%=song.song_url %>" target="_blank">Link to Listen</a></li>
-            <div id="song-<%= song.id %>-details"></div>
-        </div>
-      <br>
-      <% end %>
-    </div>
-
-    <div id="setlists" class="col-xs-5">
-
-      <%= link_to "View Setlists", setlists_path, :class => "index_setlists" %> <p>                     </p><%= link_to "New Setlist", new_setlist_path %><br>
-      <%= link_to "Filter Setlists", setlists_path, :class => "filterSetlist"  %>
-
-        <div class="setlist-show"></div>
-
-
-    </div>
-  <div class="col-xs-1"></div>
+  <div id="song-<%= song.id %>">
+    <li><a
+      class="song-link"
+      data-id="<%= song.id %>"
+      href="songs/<%=song.id %>">
+      <%= song.title %></a><br></li>
+    <li><a
+      href="<%=song.song_url %>"
+      target="_blank">Link to Listen</a></li>
+        <div id="song-<%= song.id %>-details"></div>
+      </div>
+    <br>
+  <% end %>
 </div>

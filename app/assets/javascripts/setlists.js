@@ -1,6 +1,7 @@
  $(document).ready(function() {
      setlistShow();
-     setlistFilter();
+     // setlistFilter();
+     newSetlistForm();
  })
 
  class SetList {
@@ -19,6 +20,7 @@
 
  function setlistShow() {
     $(".index_setlists").on("click", function(e) {
+      $(`.setlist-show`).toggle();
       e.preventDefault();
       $('.setlist-show').html('')
       $.get(this.href + ".json", function(setlists){
@@ -30,20 +32,16 @@
   })
 }
 
-function setlistFilter() {
-  $(".filterSetlist").on("click", function(e) {
+function newSetlistForm() {
+  $("a.link_to_setlist_form").on("click", function(e) {
     e.preventDefault();
-    $.get(this.href + ".json", function(setlists){
+    $("div.new_setlist_form").toggle();
 
-      var filterSet = setlists.filter(function (set) {
-        return (set.songs.length > 0);
-      });
-
-      $(".setlist-show").html('')
-      filterSet.forEach(function(setlist) {
-        let sl = new SetList(setlist.id, setlist.name, setlist.comments, setlist.songs)
-        $(`.setlist-show`).append(sl.renderName())
-      })
+    $.ajax({
+        method: "GET",
+        url: this.href
+    }).done(function(response) {
+        $("div.new_setlist_form").html(response)
     })
   })
-}
+  }

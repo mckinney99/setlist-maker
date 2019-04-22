@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root 'songs#index'
+  root 'home#index'
 
   get 'users/:id/setlists' => 'setlists#index'
   get 'setlist/:id/edit' => 'setlists#edit'

@@ -1,26 +1,48 @@
-<div class="info">
-  <p>Name: <%= @setlist.name %><br>
-  Comments: <%= @setlist.comments %><br>
-</div>
+<div class="flex-row">
+  <div class="col-xs-1"></div>
+    <div class="col-xs-5">
 
-<div id="setlist-<%=@setlist.id%>-songs">
-<% @setlist.songs.each do |s|%>
-  <div id="song-<%=s.id%>">
-      <li><%= s.title%><br>
-      <a href="<%= s.song_url%>"target="_blank"> Link to listen </a><br>
-        <% if current_user && current_user.id == @setlist.user_id %>
-      <%= s.comments %>
-    <%end%>
+    <button type=button><%= link_to "<-- Main Page", root_path %></button>
+    <br><br><br>
+
+
+      <div class="info">
+        <h5 class="bold">Setlist Name: </h5> <%= @setlist.name %><br><br>
+        <h5>Setlist Comments: </h5> <%= @setlist.comments %><br><br><br>
+      </div>
+
+      <div id="setlist-<%=@setlist.id%>-songs">
+      <% @setlist.songs.each do |s|%>
+        <div id="song-<%=s.id%>">
+            <h5>Song:</h5>
+            <li><%= s.title%> - <a href="<%= s.song_url%>"target="_blank"> Link to listen </a>
+            <h5>Comments:</h5>
+
+              <% if current_user && current_user.id == @setlist.user_id %>
+            <li><%= s.comments %>
+            <li><%= link_to "Edit Song", edit_song_path %> 
+              <br><br><br>
+
+          <%end%>
+          <%end%>
+
+        </div>
+      </div>
+    </div>
+
+
+      <div class="col-xs-5">
+        <% if current_user %>
+              <%= link_to "Edit setlist", edit_setlist_path(@setlist) , :class => "edit_song" %></p>
+            <% else %>
+              <%= link_to "Create Your Own Account", new_user_registration_path %>
+              </form>
+        <% end %>
+
+
+      <br><br>
+
+      <div class="col-xs-1"></div>
+    </div>
+
   </div>
-
-<br><br>
-
-<%end%>
-</div>
-
-<% if current_user %>
-      <%= link_to "Edit setlist", edit_setlist_path(@setlist) , :class => "edit_song" %></p>
-    <% else %>
-      <%= link_to "Create Your Own Account", new_user_registration_path %>
-      </form>
-<% end %>

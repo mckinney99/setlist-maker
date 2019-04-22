@@ -7,7 +7,7 @@
 }
 
 p {
-  color: white;
+
   padding-left: 15px;
 }
 
@@ -30,4 +30,16 @@ input[type=submit] {
     border: none;
     border-radius: 4px;
     cursor: pointer;
+}
+
+p.bold {
+  font: bold;
+}
+
+.new_setlist_form {
+  display: none;
+}
+
+.new_song_form {
+  display: none;
 }
