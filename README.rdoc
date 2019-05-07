@@ -8,9 +8,8 @@ Users can share their setlists with anybody, however only the creator of the set
 
 GETTING STARTED:
 
--to get started fork this repo
--run "rake db:migrate" once in the text editor
--run "rails s" to run on your browser.
+-run "rake db:migrate"
+-run "rails s" 
 
 ////////////
 
