@@ -1,0 +1,68 @@
+<div class="flex-row">
+  <div class="col-xs-1"></div>
+  <div class="col-xs-5">
+
+    <button type=button><%= link_to "New Song", { :controller => :songs, :action => :new }, class: "link_to_song_form" %></button>
+
+    <div class="new_song_form"></div><br>
+
+
+    <% if current_user  %>
+      <h2>Your Songs</h2>
+      <div class="song-titles">
+        <br>
+        <% current_user.songs.reverse.each do |song| %>
+
+          <div id="song-<%= song.id %>">
+            <li><a
+              class="song-link"
+              data-id="<%= song.id %>"
+              href="songs/<%=song.id %>">
+              <%= song.title %></a><br></li>
+            <li><a
+              href="<%=song.song_url %>"
+              target="_blank">Link to Listen</a></li>
+            <div id="song-<%= song.id %>-details"></div>
+          </div>
+          <br>
+        <% end %>
+      </div>
+
+    <% else %>
+      <h1>Create an account to make songs</h1>
+
+    <% end %>
+
+
+
+  </div>
+
+  <div class="col-xs-5">
+
+    <button type=button><%= link_to "New Setlist", { :controller => :setlists, :action => :new }, class: "link_to_setlist_form" %></button>
+
+    <div class="new_setlist_form"></div><br>
+
+    <% if current_user  %>
+      <h2>Your Setlists</h2>
+
+      <% current_user.setlists.each do |s| %>
+        <div id="setlist-<%= s.id %>" data-id="<%= s.id %>">
+          <a class="load_setlist_songs" href="/setlists/<%=s.id%>" ><br>
+            <%= s.name %><br>
+            <!-- <%= s.comments %><br> -->
+        </div>
+      <%end%>
+    <% else %>
+      <h1>Create an account to setlists</h1>
+    <% end %>
+
+    <br>
+    <!-- <%= link_to "Filter Setlists", setlists_path, :class => "filterSetlist"  %> -->
+
+    <div class="setlist-show"></div>
+
+
+  </div>
+  <div class="col-xs-1"></div>
+</div>

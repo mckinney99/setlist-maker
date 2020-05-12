@@ -7,7 +7,6 @@
 }
 
 p {
-
   padding-left: 15px;
 }
 
@@ -43,3 +42,9 @@ p.bold {
 .new_song_form {
   display: none;
 }
+
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+
