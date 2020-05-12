@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   root 'home#index'
 
   get 'users/:id/setlists' => 'setlists#index'
@@ -28,7 +27,4 @@ Rails.application.routes.draw do
   resources :setlists do
     resources :songs, except: [:index]
   end
-
-
-
 end
