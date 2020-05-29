@@ -2,28 +2,16 @@
   <div class="col-xs-1"></div>
     <div class="col-xs-5">
 
-    <button type=button><%= link_to "<-- Main Page", root_path %></button>
-    <br><br><br>
-
-
       <div class="info">
-        <h5 class="bold">Setlist Name: </h5> <%= @setlist.name %><br><br>
-        <h5>Setlist Comments: </h5> <%= @setlist.comments %><br><br><br>
+        <h2 class="bold"><%= @setlist.name %> </h2> <br><br>
       </div>
 
       <div id="setlist-<%=@setlist.id%>-songs">
+        <%# binding.pry %>
       <% @setlist.songs.each do |s|%>
         <div id="song-<%=s.id%>">
-            <h5>Song:</h5>
-            <li><%= s.title%> - <a href="<%= s.song_url%>"target="_blank"> Link to listen </a>
-            <h5>Comments:</h5>
+          <h3><a href="<%=s.song_url%>"><%= s.title%></a></h3> - <%= link_to "remove", destroy_song_path(@setlist), :class => "destroy_song" %>
 
-              <% if current_user && current_user.id == @setlist.user_id %>
-            <li><%= s.comments %>
-            <li><%= link_to "Edit Song", edit_song_path %> 
-              <br><br><br>
-
-          <%end%>
           <%end%>
 
         </div>
