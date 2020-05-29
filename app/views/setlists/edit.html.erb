@@ -12,7 +12,9 @@
 
     <br><br>
     <%=form_tag(controller: "setlists", action: "add_song") do %>
-      <%=select('songs', 'song_id', options_for_select(current_user.songs.collect{ |s| [s.title, s.id] })) %>
+      <%# binding.pry %>
+      <%=select('@songs', '@songs.ids', options_for_select(current_user.songs.collect{ |s| [s.title, s.id] })) %>
+      <%= flash[:no_songs] %>
       <%= submit_tag('Add Song To Setlist')  %>
     <%end%>
 

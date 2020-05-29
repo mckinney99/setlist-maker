@@ -32,47 +32,44 @@ class Song {
 }
 
 function setlistSongs() {
-  $(".setlist-show").on('click', '.setlist-title', function (e) {
+  $(".load_setlist_songs").on('click', function (e) {
+
     e.preventDefault();
 
-    $.get(this.href + ".json", function(setlists) {
-      let setlistId = setlists.id;
-      $(`.setlist-${setlistId}`).html('')
-      setlists.songs.forEach(function(song) {
-      let sl = new Song(song.id, song.artist, song.title, song.comments, song.songUrl)
-      $(`.setlist-${setlistId}`).append(sl.renderSetListSongs())
-      })
+    $("div.list_setlist_songs").show();
+
+    $.ajax({
+      method: "GET",
+      url: this.href
+    }).done(function(response) {
+      $(".list_setlist_songs").html(response)
     })
   })
 }
 
 function showSong() {
-    $(".song-titles").on('click', 'a.song-link', function(e) {
-      e.preventDefault();
-      $.get(this.href + ".json", function(song) {
-        let songId = song.id;
-        $(`#song-${songId}-details`).html('')
-          let sl = new Song(song.id, song.artist, song.title, song.comments, song.songUrl)
-          $(`#song-${songId}-details`).toggle();
+  $(".song-titles").on('click', 'a.song-link', function(e) {
+    e.preventDefault();
+    $.get(this.href + ".json", function(song) {
+      let songId = song.id;
+      $(`#song-${songId}-details`).html('')
+      let sl = new Song(song.id, song.artist, song.title, song.comments, song.songUrl)
+      $(`#song-${songId}-details`).toggle();
 
-          $(`#song-${songId}-details`).prepend(sl.renderSong())
-      })
+      $(`#song-${songId}-details`).prepend(sl.renderSong())
     })
-  }
+  })
+}
 
-// function showSong() {
-//     $(".song-titles").on('click', '.song-link', function(e) {
-//       e.preventDefault();
-//       $.get(this.href + ".json", function(song) {
-//         let songId = song.id;
-//         $(`#song-${songId}-details`).html('')
-//           let sl = new Song(song.id, song.artist, song.title, song.comments, song.songUrl)
-//           $(`#song-${songId}-details`).toggle();
-//
-//           $(`#song-${songId}-details`).prepend(sl.renderSong())
-//       })
-//     })
-//   }
+function removeSong() {
+  $(".remove-setlist-song").on('click', '.delete-song', function(e) {
+    e.preventDefault();
+    $.get(this.href + ".json", function(song) {
+      let songId = song.id;
+      $(`#song-${songId}-details`).html('')
+    })
+  } )
+}
 
 function newSongForm() {
     $(".link_to_song_form").on("click", function(event) {
